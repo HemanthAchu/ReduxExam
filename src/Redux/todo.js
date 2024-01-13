@@ -4,7 +4,7 @@ const todo =createSlice({
     name:"todos",
     initialState:{
         todoArray:[],
-        count:0
+        counter:""
 
     },
     reducers:{
@@ -13,12 +13,24 @@ const todo =createSlice({
         },
         deleteTodo:(state,actions)=>{
         state.todoArray =state.todoArray.filter(todo=>todo.id !==actions.payload);
+        const completedCount=state.todoArray.filter(item=>item.status).length
+            state.counter=completedCount
         },
         TodoCount:(state,actions)=>{
-            state.count=1
+            const{status,id}=actions.payload
+            state.todoArray.filter(item=>{
+                if(item.id==id){
+                    item.status=status
+                }
+                return item
+                
+            })
+            const completedCount=state.todoArray.filter(item=>item.status).length
+            state.counter=completedCount
         }
+        
     }
 
 })
-export const  {addTodo,deleteTodo,todoArray} = todo.actions;
+export const  {addTodo,deleteTodo,todoArray,TodoCount} = todo.actions;
 export default todo.reducer

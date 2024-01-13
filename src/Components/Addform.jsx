@@ -18,6 +18,7 @@ const handleAdd = (e) => {
     const newValue = input;
     dispatch(addTodo({ id: Date.now(), text: newValue }));
     setinput(""); 
+    
   }
   
 };
