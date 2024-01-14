@@ -29,14 +29,16 @@ const[tick,settick]=useState('')
       setCheckBox({status:status,id:id})
       dispatch(TodoCount(checkBox))
   }
-
+useEffect(()=>{
+  handleCheck()
+},[checkBox.status])
 
   return (
     <div>
     <ul>
     {todoArray?.map((add,id)=>(
       
-      <div className={ add.status &&'bg-secondary'}>
+      <div className={ add.status &&'bg-success'}>
         <li   id={`listItem-${add.id}`} key={id}    className={' form-inline m-2  d-flex justify-content-between align-items-center'} >
       <h5 className='ps-3'>
         <input type="checkbox" checked={add.status} onChange={e=>handleCheck(e.target.checked,add.id)}
